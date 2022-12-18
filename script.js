@@ -1,9 +1,10 @@
-let currencyMenu = document.getElementById('currencyMenu');
+// Currency rates API
+const url = 'https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json';
 
+// Getting select element and inputs
+let currencyMenu = document.getElementById('currencyMenu');
 let currencyInput = document.getElementById('currencyInput');
 let uahInput = document.getElementById('uahInput');
-
-const url = 'https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json';
 
 fetch(url)
     .then(res => { return res.json(); })
@@ -17,11 +18,8 @@ fetch(url)
 
             let currencyFlag = currencyMenu.value;
 
-            // console.log(currencyFlag);
-
             if (currencyFlag == data[i].cc) {
                 uahInput.value = currencyInput.value * data[i].rate;
-                console.log(currencyFlag);
             }
 
             currencyMenu.addEventListener('change', () => {
@@ -50,9 +48,4 @@ fetch(url)
             });
         }
     })
-    .catch(err => { console.errror(error) })
-
-let currenciesPrices = {
-    'usd': 37.44,
-    'eur': 40
-}
+    .catch(err => { console.errror(err) })
